@@ -17,9 +17,12 @@ audience.
 
 ## One-time setup
 
-**1. Run the database migration.** In your Supabase project, open **SQL Editor → New query**,
+**1. Run the database migrations.** In your Supabase project, open **SQL Editor → New query**,
 paste the contents of `supabase/migrations/0001_init.sql`, and run it. This creates the three
 tables (`app_users`, `events`, `event_participants`) and all the Row Level Security policies.
+Then do the same with `supabase/migrations/0002_shared_todos.sql` — it adds the shared "Planlar"
+checklist, hardcoded to only be visible to the usernames `hacaga` and `tunzale` (edit the list
+inside `is_todo_member()` in that file if your usernames differ).
 
 **2. Project config.** Your Supabase URL and publishable (anon) key are hardcoded in
 `src/shared/config/env.ts` — no `.env` file needed. That key is meant to be public (it's what
@@ -52,6 +55,7 @@ src/
     session/    username "auth", app_users table
     event/      events table, cost-split math
     participant/ event_participants table (the whitelist)
+    todo/       shared_todos table (the "Planlar" checklist)
   shared/       supabase client, env config, generic utils
   components/ui shadcn/ui primitives (kept at the conventional path so `npx shadcn add ...` still works)
 ```
