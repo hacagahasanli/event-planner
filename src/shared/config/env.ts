@@ -1,21 +1,11 @@
-function requireEnv(name: string, value: string | undefined): string {
-  if (!value) {
-    throw new Error(
-      `Missing ${name}. Copy .env.example to .env and fill in your Supabase project values.`
-    )
-  }
-  return value
-}
-
+// Supabase project config — hardcoded on purpose. This is the *publishable*
+// (anon) key, which is designed to be public and shipped in client bundles;
+// it has no power beyond what Row Level Security allows (see
+// supabase/migrations/0001_init.sql). Never put the secret/service-role key
+// here — that one bypasses RLS entirely.
 export const env = {
-  supabaseUrl: requireEnv(
-    "VITE_SUPABASE_URL",
-    import.meta.env.VITE_SUPABASE_URL as string | undefined
-  ),
-  supabasePublishableKey: requireEnv(
-    "VITE_SUPABASE_PUBLISHABLE_KEY",
-    import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined
-  ),
+  supabaseUrl: "https://yvpbpwkblncniwwvscds.supabase.co",
+  supabasePublishableKey: "sb_publishable_T4Vegi79nBJCYZFSTv0MyQ_Q7DsRgFI",
 }
 
 export const USERNAME_HEADER = "x-app-username"

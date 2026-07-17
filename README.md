@@ -21,17 +21,12 @@ audience.
 paste the contents of `supabase/migrations/0001_init.sql`, and run it. This creates the three
 tables (`app_users`, `events`, `event_participants`) and all the Row Level Security policies.
 
-**2. Environment variables.** `.env` already has your project's URL and publishable
-(anon) key filled in:
-
-```bash
-VITE_SUPABASE_URL=https://yvpbpwkblncniwwvscds.supabase.co
-VITE_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
-```
-
-Only the publishable key ever goes in this file. **Never** put the `sb_secret_...` service-role
-key in this app or in any client-side code — it bypasses every RLS policy above, so shipping it
-in the browser bundle would let anyone read/edit everything regardless of whitelist.
+**2. Project config.** Your Supabase URL and publishable (anon) key are hardcoded in
+`src/shared/config/env.ts` — no `.env` file needed. That key is meant to be public (it's what
+ends up in the browser bundle either way); it has no power beyond what the RLS policies allow.
+**Never** put the `sb_secret_...` service-role key anywhere in this app — it bypasses every RLS
+policy above, so shipping it in the browser bundle would let anyone read/edit everything
+regardless of whitelist.
 
 **3. Install and run:**
 
